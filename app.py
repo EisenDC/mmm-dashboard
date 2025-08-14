@@ -745,7 +745,10 @@ st.markdown("""
 <div style="text-align: center; padding: 20px;">
     <h4>🚀 Marketing Mix Model Dashboard</h4>
     <p>Análisis avanzado de performance y ROI • Optimización de inversión publicitaria</p>
-    <p><i>Desarrollado por Eisen Campos https://pytekai.netlify.app/</i></p>
+    <p><i>Desarrollado por Eisen Campos</i></p>
+    <a href="https://pytekai.netlify.app/" target="_blank" style="color: #1f77b4; text-decoration: none;">
+            pytekai.netlify.app
+        </a>
 </div>
 """, unsafe_allow_html=True)
 
