@@ -46,14 +46,10 @@ st.markdown("""
     }
 </style>
 """, unsafe_allow_html=True)
-st.markdown(
-    f"""
-    <div style="text-align: center;">
-        <img src="logo.jpg" style="max-width: 60%;">
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+from pathlib import Path
+logo_path = Path(__file__).parent / "logo.jpg"
+st.image(str(logo_path), use_column_width=False, width=200)
+
 
 # Título principal con animación
 st.markdown("""
