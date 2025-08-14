@@ -46,9 +46,26 @@ st.markdown("""
     }
 </style>
 """, unsafe_allow_html=True)
+import base64
 from pathlib import Path
+import streamlit as st
+
 logo_path = Path(__file__).parent / "logo.jpg"
-st.image(str(logo_path), use_column_width=False, width=200)
+
+if logo_path.exists():
+    with open(logo_path, "rb") as img_file:
+        img_base64 = base64.b64encode(img_file.read()).decode()
+
+    st.markdown(
+        f"""
+        <div style="text-align: center;">
+            <img src="data:image/jpeg;base64,{img_base64}" style="max-width:200px;">
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+else:
+    st.warning("⚠ No se encontró logo.jpg")
 
 
 # Título principal con animación
