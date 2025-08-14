@@ -46,11 +46,6 @@ st.markdown("""
     }
 </style>
 """, unsafe_allow_html=True)
-# Ruta relativa al archivo actual
-logo_path = Path(__file__).parent / "logo.jpg"
-
-# Mostrar logo
-st.image(str(logo_path), use_column_width=True)
 
 # Título principal con animación
 st.markdown("""
