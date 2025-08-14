@@ -721,7 +721,6 @@ if df_rezagos is not None:
         
         # Resumen estadístico detallado
         st.markdown("### 📈 Resumen Estadístico Completo")
-
         st.components.v1.html(summary_html, height=600, scrolling=True)
 
 else:
