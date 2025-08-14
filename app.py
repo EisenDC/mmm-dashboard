@@ -46,6 +46,14 @@ st.markdown("""
     }
 </style>
 """, unsafe_allow_html=True)
+st.markdown(
+    f"""
+    <div style="text-align: center;">
+        <img src="logo.jpg" style="max-width: 60%;">
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
 # Título principal con animación
 st.markdown("""
