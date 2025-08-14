@@ -723,12 +723,10 @@ if df_rezagos is not None:
         st.markdown("### 📈 Resumen Estadístico Completo")
         
         summary_html = modelo.summary().as_html()
-        custom_css = """
-        <style>
-            table { color: white !important; background-color: black !important; }
-            body { color: white !important; background-color: black !important; }
-        </style>
-        """
+        summary_html = summary_html.replace("color: black", "color: white")
+        summary_html = summary_html.replace("background-color: white", "background-color: black")
+        summary_html = summary_html.replace("<body>", "<body style='color:white; background-color:black;'>")
+
         st.components.v1.html(summary_html, height=600, scrolling=True)
 
 else:
