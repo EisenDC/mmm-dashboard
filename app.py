@@ -133,71 +133,31 @@ if data_option == "📤 Subir Datos Propios":
     else:
         df_rezagos = None
         st.sidebar.warning("⚠️ Por favor sube un archivo CSV")
+
 else:
-    # Datos demo mejorados y consistentes
-    np.random.seed(42)
+    # Datos demo mejorados
+    np.random.seed(411)
     n_periods = 156  # 3 años de datos semanales
     
-    fechas = pd.date_range('2021-01-01', periods=n_periods, freq='W')
-    
-    # Ventas con tendencia y estacionalidad anual
-    base_ventas = 450_000_000
-    tendencia = np.linspace(0, 20_000_000, n_periods)  # ligera tendencia positiva
-    estacionalidad = np.sin(np.arange(n_periods) * 2 * np.pi / 52) * 50_000_000
-    ruido_ventas = np.random.normal(0, 40_000_000, n_periods)  # menos dispersión
-    ventas = base_ventas + tendencia + estacionalidad + ruido_ventas
-    ventas = np.clip(ventas, 0, None)  # evitar ventas negativas
-
-    # Inversiones coherentes
-    inversion_total_lag2 = np.random.normal(18_000_000, 3_000_000, n_periods)
-    InvCompetidoresTot_lag3 = np.random.normal(160_000, 30_000, n_periods)
-    
-    # Variables binarias con probabilidades más realistas
     df_rezagos = pd.DataFrame({
-        'fecha': fechas,
-        'ventas': ventas,
-        'inversion_total_lag2': inversion_total_lag2,
-        'InvCompetidoresTot_lag3': InvCompetidoresTot_lag3,
+        'fecha': pd.date_range('2021-01-01', periods=n_periods, freq='W'),
+        'ventas': np.random.normal(450000000, 80000000, n_periods) + 
+                 np.sin(np.arange(n_periods) * 2 * np.pi / 52) * 50000000,  # Estacionalidad
+        'inversion_total_lag2': np.random.normal(18000000, 5000000, n_periods),
+        'InvCompetidoresTot_lag3': np.random.normal(160000, 50000, n_periods),
         'megaprima': np.random.binomial(1, 0.08, n_periods),
-        'navidad': np.random.binomial(1, 0.03, n_periods),
-        'xmas2': np.random.binomial(1, 0.03, n_periods),
-        'xmas3': np.random.binomial(1, 0.03, n_periods),
+        'navidad': np.random.binomial(1, 0.04, n_periods),
+        'xmas2': np.random.binomial(1, 0.04, n_periods),
+        'xmas3': np.random.binomial(1, 0.04, n_periods),
         'ddpe2': np.random.binomial(1, 0.06, n_periods),
-        'temp_escolar': np.random.binomial(1, 0.20, n_periods),
-        'aniversario': np.random.binomial(1, 0.05, n_periods),
-        'halloween': np.random.binomial(1, 0.05, n_periods),
+        'temp_escolar': np.random.binomial(1, 0.25, n_periods),
+        'aniversario': np.random.binomial(1, 0.04, n_periods),
+        'halloween': np.random.binomial(1, 0.04, n_periods),
         'dsi': np.random.binomial(1, 0.06, n_periods),
-        'quincena': np.random.binomial(1, 0.40, n_periods),
-        'TPM_Diario': np.random.normal(2500, 400, n_periods)
+        'quincena': np.random.binomial(1, 0.43, n_periods),
+        'TPM_Diario': np.random.normal(2500, 500, n_periods)
     })
-    
-    st.sidebar.success("✅ Usando datos demo mejorados")
-
-
-# else:
-#     # Datos demo mejorados
-#     np.random.seed(42)
-#     n_periods = 156  # 3 años de datos semanales
-    
-#     df_rezagos = pd.DataFrame({
-#         'fecha': pd.date_range('2021-01-01', periods=n_periods, freq='W'),
-#         'ventas': np.random.normal(450000000, 80000000, n_periods) + 
-#                  np.sin(np.arange(n_periods) * 2 * np.pi / 52) * 50000000,  # Estacionalidad
-#         'inversion_total_lag2': np.random.normal(18000000, 5000000, n_periods),
-#         'InvCompetidoresTot_lag3': np.random.normal(160000, 50000, n_periods),
-#         'megaprima': np.random.binomial(1, 0.08, n_periods),
-#         'navidad': np.random.binomial(1, 0.04, n_periods),
-#         'xmas2': np.random.binomial(1, 0.04, n_periods),
-#         'xmas3': np.random.binomial(1, 0.04, n_periods),
-#         'ddpe2': np.random.binomial(1, 0.06, n_periods),
-#         'temp_escolar': np.random.binomial(1, 0.25, n_periods),
-#         'aniversario': np.random.binomial(1, 0.04, n_periods),
-#         'halloween': np.random.binomial(1, 0.04, n_periods),
-#         'dsi': np.random.binomial(1, 0.06, n_periods),
-#         'quincena': np.random.binomial(1, 0.43, n_periods),
-#         'TPM_Diario': np.random.normal(2500, 500, n_periods)
-#     })
-#     st.sidebar.success("✅ Usando datos demo")
+    st.sidebar.success("✅ Usando datos demo")
 
 # Verificar si tenemos datos
 if df_rezagos is not None:
