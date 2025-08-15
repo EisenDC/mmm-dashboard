@@ -136,7 +136,7 @@ if data_option == "📤 Subir Datos Propios":
 
 else:
     # Datos demo mejorados
-    np.random.seed(27)
+    np.random.seed(17)
     n_periods = 156  # 3 años de datos semanales
     
     df_rezagos = pd.DataFrame({
