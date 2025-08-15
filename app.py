@@ -133,77 +133,31 @@ if data_option == "📤 Subir Datos Propios":
     else:
         df_rezagos = None
         st.sidebar.warning("⚠️ Por favor sube un archivo CSV")
+
 else:
-    # Datos demo mejorados para un buen ajuste
+    # Datos demo mejorados
     np.random.seed(42)
     n_periods = 156  # 3 años de datos semanales
     
-    # Estacionalidad semanal
-    semanas = np.arange(n_periods)
-    estacionalidad = 50_000_000 * np.sin(2 * np.pi * semanas / 52)
-    
-    # Variables de medios
-    inversion_tv = np.random.normal(20_000_000, 5_000_000, n_periods)
-    inversion_digital = np.random.normal(15_000_000, 4_000_000, n_periods)
-    inversion_radio = np.random.normal(5_000_000, 1_000_000, n_periods)
-    
-    # Efectos de competencia
-    inv_competidores = np.random.normal(2_000_000, 500_000, n_periods)
-    
-    # Eventos especiales
-    navidad = ((semanas % 52) == 50).astype(int)
-    quincena = ((semanas % 2) == 0).astype(int)
-    
-    # Generar ventas como combinación lineal + ruido
-    ventas = (
-        300_000_000
-        + 3.5 * inversion_tv
-        + 2.2 * inversion_digital
-        + 1.5 * inversion_radio
-        - 1.8 * inv_competidores
-        + 80_000_000 * navidad
-        + 15_000_000 * quincena
-        + estacionalidad
-        + np.random.normal(0, 10_000_000, n_periods)
-    )
-    
-    # DataFrame final
     df_rezagos = pd.DataFrame({
         'fecha': pd.date_range('2021-01-01', periods=n_periods, freq='W'),
-        'ventas': ventas,
-        'inversion_tv': inversion_tv,
-        'inversion_digital': inversion_digital,
-        'inversion_radio': inversion_radio,
-        'InvCompetidoresTot_lag3': inv_competidores,
-        'navidad': navidad,
-        'quincena': quincena
+        'ventas': np.random.normal(450000000, 80000000, n_periods) + 
+                 np.sin(np.arange(n_periods) * 2 * np.pi / 52) * 50000000,  # Estacionalidad
+        'inversion_total_lag2': np.random.normal(18000000, 5000000, n_periods),
+        'InvCompetidoresTot_lag3': np.random.normal(160000, 50000, n_periods),
+        'megaprima': np.random.binomial(1, 0.08, n_periods),
+        'navidad': np.random.binomial(1, 0.04, n_periods),
+        'xmas2': np.random.binomial(1, 0.04, n_periods),
+        'xmas3': np.random.binomial(1, 0.04, n_periods),
+        'ddpe2': np.random.binomial(1, 0.06, n_periods),
+        'temp_escolar': np.random.binomial(1, 0.25, n_periods),
+        'aniversario': np.random.binomial(1, 0.04, n_periods),
+        'halloween': np.random.binomial(1, 0.04, n_periods),
+        'dsi': np.random.binomial(1, 0.06, n_periods),
+        'quincena': np.random.binomial(1, 0.43, n_periods),
+        'TPM_Diario': np.random.normal(2500, 500, n_periods)
     })
-
-    st.sidebar.success("✅ Usando datos demo mejorados (R² alto y contribuciones claras)")
-# else:
-#     # Datos demo mejorados
-#     np.random.seed(42)
-#     n_periods = 156  # 3 años de datos semanales
-    
-#     df_rezagos = pd.DataFrame({
-#         'fecha': pd.date_range('2021-01-01', periods=n_periods, freq='W'),
-#         'ventas': np.random.normal(450000000, 80000000, n_periods) + 
-#                  np.sin(np.arange(n_periods) * 2 * np.pi / 52) * 50000000,  # Estacionalidad
-#         'inversion_total_lag2': np.random.normal(18000000, 5000000, n_periods),
-#         'InvCompetidoresTot_lag3': np.random.normal(160000, 50000, n_periods),
-#         'megaprima': np.random.binomial(1, 0.08, n_periods),
-#         'navidad': np.random.binomial(1, 0.04, n_periods),
-#         'xmas2': np.random.binomial(1, 0.04, n_periods),
-#         'xmas3': np.random.binomial(1, 0.04, n_periods),
-#         'ddpe2': np.random.binomial(1, 0.06, n_periods),
-#         'temp_escolar': np.random.binomial(1, 0.25, n_periods),
-#         'aniversario': np.random.binomial(1, 0.04, n_periods),
-#         'halloween': np.random.binomial(1, 0.04, n_periods),
-#         'dsi': np.random.binomial(1, 0.06, n_periods),
-#         'quincena': np.random.binomial(1, 0.43, n_periods),
-#         'TPM_Diario': np.random.normal(2500, 500, n_periods)
-#     })
-#     st.sidebar.success("✅ Usando datos demo")
+    st.sidebar.success("✅ Usando datos demo")
 
 # Verificar si tenemos datos
 if df_rezagos is not None:
