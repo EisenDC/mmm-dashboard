@@ -133,7 +133,7 @@ if data_option == "📤 Subir Datos Propios":
     else:
         df_rezagos = None
         st.sidebar.warning("⚠️ Por favor sube un archivo CSV")
- else:
+else:
     # Datos demo mejorados y consistentes
     np.random.seed(42)
     n_periods = 156  # 3 años de datos semanales
@@ -172,6 +172,7 @@ if data_option == "📤 Subir Datos Propios":
     })
     
     st.sidebar.success("✅ Usando datos demo mejorados")
+
 
 # else:
 #     # Datos demo mejorados
